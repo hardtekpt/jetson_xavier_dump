@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Arguments received when starting the environment -->
+  <arg name="name" default="iris"/>
+  <arg name="mission" default="simulation"/>
+  <arg name="ID" default="0"/>
+
+  <!-- Define the namespace for this drone being launched -->
+  <arg name="namespace" value="$(arg name)$(arg ID)"/>
+
+  <!-- Load global vehicle parameters -->
+  <rosparam command="load" file="$(find drone_bringup)/config/dev_configs/config.yaml"/>
+  <rosparam command="load" file="$(find drone_bringup)/config/$(arg mission)/$(arg name)/config.yaml"/>
+  <param name="ID" type="int" value="$(arg ID)"/>
+  <param name="namespace" type="string" value="$(arg namespace)"/>
+
+  <!-- *************************** -->
+  <!-- Launch all the launch files -->
+  <!-- *************************** -->
+
+  <!-- Control algorithms 
+  <include file="$(find drone_bringup)/launch/dev_launch/control.launch">
+    <arg name="name"            value="$(arg name)"   />
+    <arg name="mission"         value="$(arg mission)"/>
+    <arg name="path_following"  value="true"          />
+  </include>-->
+
+
+  <include file="$(find waypoint_following)/launch/waypoint_following.launch">
+  </include>
+
+</launch>

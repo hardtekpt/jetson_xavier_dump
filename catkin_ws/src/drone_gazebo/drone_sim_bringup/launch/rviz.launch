@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!-- Bringup file to spawn both the world and 1 drone -->
+<launch>
+  
+    <!-- Flags to select GUI, frame of reference, vehicle and world-->
+    <arg name="gui" default="false"/>
+    <arg name="world_frame" default="world"/>
+    <arg name="world" default="$(find drone_worlds)/worlds/empty.world"/>
+    <arg name="use_sim_time" default="true"/>
+
+    <!-- Vehicle's name and identifier -->
+    <arg name="name" default="iris"/>
+    <arg name="ID" default="0"/>
+    
+    <!-- PX4 Configurations -->
+    <arg name="px4_config" default="rcS"/>
+    <arg name="px4_name_config" default="iris" />
+
+    <!-- Vehicle's initial pose in ENU-->
+    <arg name="x"     default="0.0"/>
+    <arg name="y"     default="0.0"/>
+    <arg name="z"     default="0.0"/>
+    <arg name="roll"  default="0.0"/>
+    <arg name="pitch" default="0.0"/>
+    <arg name="yaw"   default="0.0"/>
+    
+    <!-- Gazebo sim -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="world_name" value="$(arg world)"/>
+        <arg name="debug" value="false"/>
+        <arg name="verbose" value="false"/>
+        <arg name="paused" value="false"/>
+        <arg name="respawn_gazebo" value="false"/>
+    </include>
+
+    <!-- Launch the drone vehicle -->
+    <include file="$(find drone_sim_bringup)/launch/vehicle_bringup.launch">
+
+        <!-- Vehicle name and Identifier -->
+        <arg name="name" value="$(arg name)"/>
+        <arg name="ID" value="$(arg ID)" />
+
+        <!-- Initial pose of the vehicle-->
+        <arg name="x" value="$(arg x)"/>
+        <arg name="y" value="$(arg y)"/>
+        <arg name="z" value="$(arg z)"/>
+        <arg name="roll"  value="$(arg roll)"/>
+        <arg name="pitch" value="$(arg pitch)"/>
+        <arg name="yaw"   value="$(arg yaw)"/>
+
+        <!-- Configurations for the PX4 -->
+        <arg name="px4_config" value="$(arg px4_config)" />
+	      <arg name="px4_name_config" value="$(arg px4_name_config)" />
+    </include>
+
+    <node name="rviz" pkg="rviz" type="rviz"  required="true" args="-d $(find drone_sim_bringup)/launch/rvizcfg.rviz" />
+    <node pkg="rviz_uav_marker" type="rviz_uav_marker_node" name="RvizUavMarkerNode" respawn="false" output="screen"></node>
+
+
+</launch>

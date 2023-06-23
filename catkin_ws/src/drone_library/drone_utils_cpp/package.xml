@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="2">
+ <name>drone_utils_cpp</name>
+ <version>1.0.0</version>
+ <description>Library with containers to hold data about the drone</description>
+
+ <license>GPLv3</license>
+
+ <author email="tiago.alexandre.oliveira@tecnico.ulisboa.pt">Tiago Alexandre da Silva Oliveira</author>
+ <author email="marcelo.jacinto@tecnico.ulisboa.pt">Marcelo Fialho Jacinto</author>
+ <maintainer email="marcelo.jacinto@tecnico.ulisboa.pt">Marcelo Jacinto</maintainer>
+
+ <buildtool_depend>catkin</buildtool_depend>
+ <depend>roscpp</depend> 
+
+</package>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+ <name>check_interest_points</name>
+ <version>1.0.0</version>
+ <description>Gets ineterest points and travels through them</description>
+
+ <license>GPLv3</license>
+
+ <author email="francisco.velez@tecnico.ulisboa.pt">Francisco Santos</author>
+ <maintainer email="francisco.velez@tecnico.ulisboa.pt">Francisco Santos</maintainer>
+
+ <buildtool_depend>catkin</buildtool_depend>
+ 
+ <depend>roscpp</depend>
+ <depend>mavros_cpp</depend>
+ <depend>drone_gimmicks_library</depend>
+ <depend>drone_utils_cpp</depend>
+
+  <!-- Necessary ROS messages -->
+ <depend>std_msgs</depend>
+ <depend>geometry_msgs</depend>
+ <depend>visualization_msgs</depend>
+ <depend>sensor_msgs</depend>
+ <depend>mavros_msgs</depend>
+
+ <build_depend>message_generation</build_depend>
+ <exec_depend>message_runtime</exec_depend>
+</package>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+
+<node pkg="drone_follow_waypoint" type="drone_follow_waypoint_node" name="drone_follow_waypoint" respawn="false" output="screen"/>
+
+</launch>

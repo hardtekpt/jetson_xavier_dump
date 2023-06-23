@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!-- Bringup file to spawn both the world and 1 drone -->
+<launch>
+
+    <!-- Vehicle's name and identifier -->
+    <arg name="name" default="iris"/>
+    <arg name="ID" default="2"/>
+    
+    <!-- PX4 Configurations -->
+    <arg name="px4_config" default="rcS"/>
+    <arg name="px4_name_config" default="iris" />
+
+  <!-- Launch the UAV with the appropriate namespace -->
+  <group ns="$(arg name)$(arg ID)">
+
+    <!-- MAVROS and vehicle configs -->
+    <arg name="port_name_real" value="$(eval 15000 + arg('ID'))" />
+
+    <!-- MAVROS Configurations -->
+    <include file="$(find mavros)/launch/px4.launch">
+      <arg name="fcu_url" value="udp://:$(arg port_name_real)@"/>
+      <arg name="gcs_url" value="udp://@localhost:14550"/>
+      <arg name="tgt_system" value="$(eval arg('ID'))"/>
+      <arg name="tgt_component" value="1"/>
+    </include>
+
+     <!-- Load Drone_vx algorithms -->
+     <include file="$(find drone_bringup)/launch/drone_sim.launch">
+       <arg name="name" value="$(arg px4_name_config)"/>
+       <arg name="ID"   value="$(arg ID)"/>
+       <arg name="mission" value="simulation"/>
+     </include>
+
+
+    
+   </group> 
+
+   <node name="rviz" pkg="rviz" type="rviz"  required="true" args="-d $(find drone_sim_bringup)/launch/rvizcfg_aero2.rviz" />
+    <node pkg="rviz_uav_marker" type="rviz_uav_marker_node" name="RvizUavMarkerNode" respawn="false" output="screen"></node>
+
+
+</launch>

@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Vehicle Model -->
+  <arg name="name" default="iris"/>
+  <arg name="ID" default="0" />
+
+  <!-- Vehicle's initial pose in ENU -->
+  <arg name="x"     default="0.0"/>
+  <arg name="y"     default="0.0"/>
+  <arg name="z"     default="0.0"/>
+  <arg name="roll"  default="0.0"/>
+  <arg name="pitch" default="0.0"/>
+  <arg name="yaw"   default="0.0"/>
+
+  <!-- PX4 Configurations -->
+  <arg name="px4_config" default="rcS"/>
+  <arg name="px4_name_config" default="iris"/>
+
+  <!-- Launch the UAV with the appropriate namespace -->
+  <group ns="$(arg name)$(arg ID)">
+
+    <!-- MAVROS and vehicle configs -->
+    <arg name="ip_name" value="$(eval 14540 + arg('ID'))" />
+    <arg name="ip_port" value="$(eval 14580 + arg('ID'))" />
+
+    <!-- PX4 SITL and vehicle spawn -->
+    <include file="$(find drone_sim_bringup)/launch/single_vehicle_spawn.launch">
+      <!-- Initial vehicle position -->
+      <arg name="x" value="$(arg x)"/>
+      <arg name="y" value="$(arg y)"/>
+      <arg name="z" value="$(arg z)"/>
+      <arg name="roll" value="$(arg roll)"/>
+      <arg name="pitch" value="$(arg pitch)"/>
+      <arg name="yaw" value="$(arg yaw)"/>
+      <arg name="vehicle" value="$(arg name)"/>
+      <arg name="mavlink_udp_port" value="$(eval 14560 + arg('ID'))"/>
+      <arg name="mavlink_tcp_port" value="$(eval 4560 + arg('ID'))"/>
+
+      <!-- Video Parameters -->
+      <arg name="gst_udp_port" value="$(eval 5600 + arg('ID'))"/>
+      <arg name="video_uri" value="$(eval 5600 + arg('ID'))"/>
+      <arg name="mavlink_cam_udp_port" value="$(eval 14530 + arg('ID'))"/>
+
+      <!-- Vehicle ID and configurations -->
+      <arg name="ID" value="$(arg ID)"/>
+      <arg name="px4_config" value="$(arg px4_config)"/>
+      <arg name="px4_name_config" value="$(arg px4_name_config)"/>
+    </include>
+
+    <!-- MAVROS Configurations -->
+    <include file="$(find mavros)/launch/px4.launch">
+      <arg name="fcu_url" value="udp://:$(arg ip_name)@localhost:$(arg ip_port)"/>
+      <arg name="gcs_url" value=""/>
+      <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
+      <arg name="tgt_component" value="1"/>
+    </include>
+
+     <!-- Load Drone_vx algorithms -->
+     <include file="$(find drone_bringup)/launch/drone_sim.launch">
+       <arg name="name" value="$(arg px4_name_config)"/>
+       <arg name="ID"   value="$(arg ID)"/>
+       <arg name="mission" value="simulation"/>
+     </include>
+
+  </group> 
+</launch>
+
+<!-- to add more UAVs (up to 10) - Change the ID
+The FCU will be given by udp://:14540+id@localhost:14580+id
+The mavlink_udp_port will be given by 14560+id 
+The mavlink_tcp_port will be given by 4560+id -->

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+<!-- Vehicle Identification -->
+  <arg name="name" default="iris"/>
+  <arg name="ID" default="2" />
+
+<group ns="$(arg name)$(arg ID)">
+  <rosparam file="$(find network_manager)/config/wsn_config.yaml" />
+
+  <node pkg="mission_planner" type="mission_planner_node" name="MissionPlannerNode" respawn="false" output="screen">
+      </node>
+
+</group> 
+
+</launch>

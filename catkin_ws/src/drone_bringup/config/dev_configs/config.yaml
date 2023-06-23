@@ -1,0 +1,49 @@
+# Topics provided by the path package
+
+# Topics provided by the path following algorithm
+simple_path_following:
+  node_frequency: 30
+  topics:
+    # Define here the names of the topics that can be subscribed 
+    subscribers:
+      state: "nav/filter/state"
+      path: "PathData"
+      vc: "PF/vc"
+      utm: "initial_utm"
+      mavros:
+        pose: "mavros/local_position/pose"
+        vel: "mavros/local_position/velocity_local"
+        vel_body: "mavros/local_position/velocity_body"
+        status: "mavros/state"
+        battery: "mavros/battery"
+        extended_state: "mavros/extended_state"
+                     
+    # Define here the name of the topics to publish the reference signals
+    publishers:
+      rabbit: "Gamma"
+      debug: "Debug"
+      mavros:
+        set_att_thrust: "mavros/setpoint_raw/attitude"
+        waypoint: "mavros/setpoint_position/local"
+      
+    # Define here the name of the services to publish the reference signals
+    services:
+      # Service names to start and stop the path following algorithm
+      start_pf: "PFStart"
+      stop_pf: "PFStop"
+      update_gains_pf: "PFUpdateGains"
+     
+      # Service names to switch the path following algorithm
+      set_pid_pf: "PFSetPID"
+      set_Rita_pf: "PFSetRita"
+      set_Marcelo_pf: "PFSetMarcelo"
+    
+      # Service names related to the path
+      reset_path: "ResetPath"
+      set_path_mode: "SetMode"
+      
+      # Services provided by mavros
+      mavros:
+        set_mode: "mavros/set_mode"
+        arming: "mavros/cmd/arming"
+

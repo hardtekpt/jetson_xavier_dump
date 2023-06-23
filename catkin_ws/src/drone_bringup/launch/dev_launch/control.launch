@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+
+  <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}]: ${node}: ${message}"/>
+
+  <!-- ######################## -->
+  <!-- Parameters and Arguments -->
+  <!-- ######################## -->
+  <arg name="name"                />   
+  <arg name="mission"             default="simulation"/>   
+  <arg name="path_following"      default="true"      />   <!-- assume you have a sensor by default -->
+
+  <!-- path following and cooperative path following controllers   --> 
+  <group if="$(arg path_following)">
+    <!--<node pkg="path_following_drone" type="path_following_drone_node" name="path_following_drone" respawn="false" output="screen" />-->
+    <node pkg="simple_path_following" type="simple_path_following_node" name="simple_path_following" respawn="false" output="screen"/>
+  </group>
+
+
+</launch>
+

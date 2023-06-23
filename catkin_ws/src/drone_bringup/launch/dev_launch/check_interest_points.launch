@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+
+<node pkg="check_interest_points" type="check_interest_points_node" name="check_interest_points" respawn="false" output="screen"/>
+
+</launch>

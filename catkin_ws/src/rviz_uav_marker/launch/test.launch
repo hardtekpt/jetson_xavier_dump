@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node pkg="rviz_uav_marker" type="rviz_uav_marker_node" name="RvizUavMarkerNode" respawn="false" output="screen"></node>
+
+</launch>

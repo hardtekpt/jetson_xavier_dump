@@ -1,0 +1,37 @@
+drone_params:
+  mass: 1.52
+  radius: 0.275
+  height: 0.100
+  num_motors: 4
+  thrust_curve: "iris"
+  g: 9.8066
+
+lissajous_2:
+  pid:
+    kp: [5.5, 5.5, 4.5]
+    ki: [0.15, 0.15, 0.5]
+    kd: [4.0, 4.0, 4.0]
+
+check_interest_points:
+  control_parameters:
+    max_num_waypoints: 10
+    world_limits_x: [-10, 10]
+    world_limits_y: [-10, 10]
+  drone:
+    initial_pos: [0.0 ,0.0 ,-1]
+  pid:
+    kp: [5.5, 5.5, 4.5]
+    ki: [0.15, 0.15, 0.5]
+    kd: [4.0, 4.0, 4.0]
+
+waypoint_following:
+  control_parameters:
+    max_num_waypoints: 10
+    world_limits_x: [-10, 10]
+    world_limits_y: [-10, 10]
+  drone:
+    initial_pos: [0.0 ,0.0 ,-1]
+  pid:
+    kp: [5.5, 5.5, 4.5]
+    ki: [0.15, 0.15, 0.5]
+    kd: [4.0, 4.0, 4.0]

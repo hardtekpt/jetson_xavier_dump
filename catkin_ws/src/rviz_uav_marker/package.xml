@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+ <name>rviz_uav_marker</name>
+ <version>1.0.0</version>
+ <description>Implements a testing environment for the check_interest_points package</description>
+
+ <license>GPLv3</license>
+
+ <author email="marcelo.jacinto@tecnico.ulisboa.pt">Marcelo Jacinto</author>
+ <maintainer email="marcelo.jacinto@tecnico.ulisboa.pt">Marcelo Jacinto</maintainer>
+
+ <buildtool_depend>catkin</buildtool_depend>
+ 
+ <depend>roscpp</depend>
+   <!-- Necessary ROS messages -->
+ <depend>std_msgs</depend>
+ <depend>geometry_msgs</depend>
+ <depend>sensor_msgs</depend>
+ <depend>mavros_msgs</depend>
+ <depend>visualization_msgs</depend>
+ 
+
+ <build_depend>message_generation</build_depend>
+ <exec_depend>message_runtime</exec_depend>
+</package>

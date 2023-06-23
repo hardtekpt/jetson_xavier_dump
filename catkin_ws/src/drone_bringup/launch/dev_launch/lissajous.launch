@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+
+<node pkg="lissajous" type="lissajous_node" name="lissajous" respawn="false" output="screen"/>
+
+</launch>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<launch>
+    <rosparam file="$(find network_manager)/config/wsn_config.yaml" />
+
+    <node pkg="network_manager" name="network_manager_node" type="network_manager.py" output="screen">
+    </node>
+</launch>
